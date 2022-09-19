@@ -1,24 +1,16 @@
+/*
+ * File: 0-reset_to_98.c
+ * Auth: Elvis Murithi
+ */
+
 #include "main.h"
-#include <stdio.h>
 
 /**
- * _strcat - appends src to the dest string
- * @dest: string to append by src
- * @src: string to append to dest
- *
- * Return: address of dest
+ * reset_to_98 - Takes a pointer to an int and updates
+ *               the value it points to to 98.
+ * @n: The pointer to an int.
  */
-char *_strcat(char *dest, char *src)
+void reset_to_98(int *n)
 {
-	int i, j;
-
-	i = j = 0;
-	while (*(dest + i))
-		i++;
-	while ((*(dest + i) = *(src + j)))
-	{
-		i++;
-		j++;
-	}
-	return (dest);
+	*n = 98;
 }
