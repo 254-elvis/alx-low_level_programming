@@ -1,79 +1,54 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 #include "lists.h"
 
 /**
- * _strlen - calculate the length of a string
- * @str: the string to calculate the length of
+ * add_node_end - function that adds a new node at the end of list.
+ * @head: pointer to singly linked list.
+ * @str: pointer to signly linked list.
  *
- * Return: the length of the string
- */
-size_t _strlen(const char *str)
-{
-	const char *pos = str;
-
-	if (str)
-	{
-		while (*pos)
-			++pos;
-	}
-	return (pos - str);
-}
-
-/**
- * _strdup - create a new array containing a copy of the given string
- * @str: a pointer to the string to copy
+ * str needs to be duplicated.
+ * You are allowed to use strdup.
  *
- * Return: If str is NULL or if memory allocation fails, return NULL.
- * Otherwise a return a pointer to the new copy
- */
-char *_strdup(const char *str)
-{
-	char *dup = NULL;
-	size_t size = 0;
-
-	if (!str)
-		return (NULL);
-
-	while (str[size++])
-		;
-
-	dup = malloc(sizeof(char) * size);
-	if (!dup)
-		return (NULL);
-
-	while (size--)
-		dup[size] = str[size];
-
-	return (dup);
-}
-
-/**
- * add_node_end - add a string at the end of the list
- * @head: a pointer to the address of the first list node
- * @str: the string to add to the list
+ * Return: The address of the new element or NULL if it failed.
  *
- * Return: If memory allocation fails, return NULL. Otherwise, return the
- * address of the new no
  */
+
 list_t *add_node_end(list_t **head, const char *str)
 {
-	list_t *new = NULL;
+	list_t *new_node, *last;
+	size_t length = 0;
 
-	if (!head)
+	new_node = malloc(sizeof(list_t));
+	/* if it fails returb NULL */
+	if (new_node == NULL)
 		return (NULL);
-
-	if (*head)
-		return (add_node_end(&(*head)->next, str));
-
-	new = malloc(sizeof(list_t));
-	if (!new)
-		return (NULL);
-
-
-	new->str = _strdup(str);
-	new->len = (_strlen(new->str));
-	new->next = *head;
-
-	*head = new;
-
-	return (new);
+	/* loop through the string to find length */
+	while (str[length])
+		length++;
+	/* access the length of new_node and assign it to length */
+	new_node->len = length;
+	/* access the list of new_node and duplicate it */
+	new_node->str = strdup(str);
+	/* if there is no head/linked list make new_node as head */
+	if (*head == NULL)
+	{
+		new_node->next = *head; /*this step isn't needed really */
+		*head = new_node;
+	}
+	else
+	{	/**
+		 * the new node is going to be the last node so make next,
+		 * of it as NULL
+		 */
+		new_node->next = NULL;
+		last = *head;
+		/* traverse till last node */
+		while (last->next)
+			last = last->next;
+		/* change the next of last node */
+		last->next = new_node;
+	}
+	return (new_node);
 }
