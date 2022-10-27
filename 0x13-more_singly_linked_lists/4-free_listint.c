@@ -2,54 +2,21 @@
 #include "lists.h"
 
 /**
- * free_listint - function that frees a listint_t list
- * @head: input header pointer
- * Return: nothing
+ * free_listint - frees a list
+ * @head: head node
+ * Return: void
  */
 
 void free_listint(listint_t *head)
 {
-	listint_t *tmp;
-
-	while (head != NULL)
+	while (head)
 	{
-		tmp = head;
+		listint_t *tmp = head;
+
 		head = head->next;
 		free(tmp);
 	}
-}
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-"4-free_listint.c" [New File]                                    0,0-1         All
+}4-free_listint.c" [New File]                                    0,0-1         All
 
 ~
 ~
